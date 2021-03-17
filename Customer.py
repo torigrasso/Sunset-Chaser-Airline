@@ -9,6 +9,8 @@ class Customer:
         self.current_flight = None
         self.current_seats = None
 
+        # add to the database
+
     def get_tickets(self):
         pass
 
