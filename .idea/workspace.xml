@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9b9e8f5a-030a-451f-a2e3-be65f155c749" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/airline.db" beforeDir="false" afterPath="$PROJECT_DIR$/airline.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615530820497</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Manager Class and Manager Sign In">
+      <created>1615953032667</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615953032667</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -290,7 +293,7 @@
       <window_info id="DB Browser" order="3" weight="0.3291367" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32952926" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32952926" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39942938" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -309,7 +312,8 @@
     <MESSAGE value="Testing my first commit" />
     <MESSAGE value="Addition of the sqlite database." />
     <MESSAGE value="GUI set up and Flight class started." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI set up and Flight class started." />
+    <MESSAGE value="Manager Class and Manager Sign In" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manager Class and Manager Sign In" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
