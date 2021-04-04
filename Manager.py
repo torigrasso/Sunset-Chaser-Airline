@@ -9,7 +9,7 @@ class Manager:
         self.password = password
         self.auth_code = auth_code
 
-        # ---- Add To Database ----
+        # Connect to the DB
         def create_connection(file):
             conn = None
             try:
@@ -21,7 +21,7 @@ class Manager:
         conn = create_connection("airline.db")
         c = conn.cursor()
 
+        # Add To Database
         insert_string = "INSERT INTO MANAGER (USER, PASSWORD, AUTH_CODE) VALUES (?, ? , ?)"
-
         with conn:
             c.execute(insert_string, [self.username, str(self.password), int(self.auth_code)])

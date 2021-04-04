@@ -1,11 +1,29 @@
-
+import sqlite3
+from sqlite3 import Error
+from random import randint
 
 class Flight:
 
-    def __init__(self, number):
-        self.number = number
-        self.score = None
-        self.seats = []
+    def __init__(self):
+
+        conn = self.create_connection("airline.db")
+        c = conn.cursor()
+
+        # get the current flight's info
+        with conn:
+            c.execute("SELECT * FROM FLIGHT WHERE ACTIVE=?", ("True",))
+
+        rows = c.fetchall()
+
+        self.number = rows[0][0]
+        self.score = rows[0][1]
+        seat_string = rows[0][2]
+
+        self.seats = seat_string.split(",")
+        self.active = True
+
+        self.customer_list = rows[0][3]
+
         self.seat_names = ["1A", "1B", "1C", "1D", "1E", "1F", "2A", "2B", "2C", "2D", "2E", "2F", "3A", "3B", "3C",
                            "3D", "3E", "3F", "4A", "4B", "4C", "4D", "4E", "4F", "5A", "5B", "5C", "5D", "5E", "5F",
                            "6A", "6B", "6C", "6D", "6E", "6F", "7A", "7B", "7C", "7D", "7E", "7F", "8A", "8B", "8C",
@@ -15,51 +33,92 @@ class Flight:
                            "15B", "15C", "15D", "15E", "15F", "16A", "16B", "16C", "16D", "16E", "16F", "17A", "17B",
                            "17C", "17D", "17C", "17E", "17F", "18A", "18B", "18C", "18D", "18E", "18F", "19A", "19B",
                            "19C", "19D", "19C", "19E", "19F", "20A", "20B", "20C", "20D", "20E", "20F"]
-        self.active = True
+
+    # Connect to the DB
+    def create_connection(self, file):
+        conn = None
+        try:
+            conn = sqlite3.connect(file)
+        except Error as e:
+            print(e)
+        return conn
+
+    def update_DB(self):
+        conn = self.create_connection("airline.db")
+        c = conn.cursor()
+
+        # get the current flight's info
+        with conn:
+            c.execute("UPDATE FLIGHT SET SCORE=? WHERE NUMBER=?", (self.score, self.number))
+            c.execute("UPDATE FLIGHT SET SEATS=? WHERE NUMBER=?", (self.seats, self.number))
+            c.execute("UPDATE FLIGHT SET ACTIVE=? WHERE NUMBER=?", (self.active, self.number))
+            c.execute("UPDATE FLIGHT SET CUSTOMERS=? WHERE NUMBER=?", (self.customer_list, self.number))
 
     def create_new_flight(self):
-        self.seats = [None]*120
+        self.seats = ['None']*120
         self.active = True
+        self.number += 1
+        self.customer_list = ['']
 
-    def get_seat_number(self, indices):
-        seats = []
-        for i in indices:
-            seats.append(self.seat_names[i])
-        return seats
+        conn = self.create_connection("airline.db")
+        c = conn.cursor()
+
+        # Add To Database
+        insert_string = "INSERT INTO FLIGHT (NUMBER, SCORE, SEATS, ACTIVE, CUSTOMERS) VALUES (?, ? , ?, ?, ?)"
+        with conn:
+            c.execute(insert_string, [self.number, self.score, self.seats, self.active, self.customer_list])
+
+        # initiate again
+        self.__init__()
+
+    def get_seat_number(self, indice):
+        return self.seat_names[indice]
 
     def get_seats(self):
         return self.seats
 
     def add_business(self, user, business_select):
+
+        # give the user three options if possible
+        options = []
+
         # traveler chooses to sit in business select
         if business_select:
+
             # loop through the first two rows
             for i in range(0,13):
                 if self.seats[i] is None:
+
                     self.seats[i] = user
                     return self.seats[i]
+
             # if nothing was found in business select
             for i in range(13, len(self.seats)):
                 if self.seats[i] is None:
+
                     self.seats[i] = user
                     return self.seats[i]
 
         else:
+
             for i in range(13, len(self.seats)):
                 if self.seats[i] is None:
+
                     self.seats[i] = user
                     return self.seats[i]
+
             # if nothing was found in normal seating
             for i in range(0,13):
                 if self.seats[i] is None:
+
                     self.seats[i] = user
                     return self.seats[i]
 
     def reassign(self):
         pass
 
-    def confirm(self, suggested):
-        pass
+    def confirm(self, seat, user):
+        self.seats[seat] = user
 
     def add_tourist(self, user):
         pass
@@ -71,5 +130,27 @@ class Flight:
         self.active = False
         self.calculate_satisfactory_score()
 
+        self.update_DB()
+
     def calculate_satisfactory_score(self):
-        pass
+        if len(self.customer_list < 10):
+            groups = self.customer_list
+        else:
+            temp = self.customer_list
+            groups = []
+            # find random customers to poll
+            for i in range(10):
+                randomI = randint(0, len(self.customer_list-1))
+                groups[i] = temp[randomI]
+                # remove customer after selecting so you do not chose them again
+                temp.pop(randomI)
+
+        # calculate results by traveler type
+        #for customer in groups:
+
+
+
+
+
+        # set self.score
+
