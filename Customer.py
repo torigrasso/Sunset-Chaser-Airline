@@ -66,7 +66,15 @@ class Customer:
         self.update_DB()
 
     def calculate_satisfaction(self, type):
-        pass
+        if type == "BT-BS":
+            pass
+        elif type == "BT-N":
+            pass
+        elif type == "TT":
+            pass
+        elif type == "FT":
+            pass
+
 
     def get_ticket_info(self):
         return str(self.flight_num), self.type, self.seats

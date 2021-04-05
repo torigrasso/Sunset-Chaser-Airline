@@ -14,7 +14,17 @@ class MyTestCase(unittest.TestCase):
         options = flight.add_business("user2", False)
         flight.confirm([options[0]], "user2")
 
-    
+    def test_addTourist(self):
+        flight = Flight()
+
+    def test_addFamilyOne(self):
+        flight = Flight()
+
+    def test_addFamilyTwo(self):
+        flight = Flight()
+
+    def test_addFamilyThree(self):
+        flight = Flight()
 
 
 if __name__ == '__main__':

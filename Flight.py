@@ -81,6 +81,20 @@ class Flight:
     def get_seats(self):
         return self.seats
 
+    def confirm(self, seats, user):
+        # assign seat
+        for s in seats:
+            self.seats[s] = user
+        # add to customer list
+        if user not in self.customer_list:
+            self.customer_list.append(user)
+        # update the database
+        self.update_DB()
+
+        # update customer's information
+        c = Customer(user)
+        c.confirm_tickets(seats, self.number)
+
     def add_business(self, user, business_select):
 
         # give the user three options if possible
@@ -120,25 +134,15 @@ class Flight:
 
         return options
 
-    def confirm(self, seats, user):
-        # assign seat
-        for s in seats:
-            self.seats[s] = user
-        # add to customer list
-        if user not in self.customer_list:
-            self.customer_list.append(user)
-        # update the database
-        self.update_DB()
-
-        # update customer's information
-        c = Customer(user)
-        c.confirm_tickets(seats, self.number)
-
     def add_tourist(self, user):
-        pass
+        # give the user three options if possible
+        options = []
+
+
 
     def add_family(self, user, child_count):
-        pass
+        # give the user three options if possible
+        options = []
 
     def end_flight(self):
         self.active = 'False'
