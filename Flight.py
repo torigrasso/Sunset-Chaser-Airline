@@ -131,7 +131,7 @@ class Flight:
 
         # update customer's information
         c = Customer(user)
-        c.confirm_tickets(seats)
+        c.confirm_tickets(seats, self.number)
 
     def add_tourist(self, user):
         pass

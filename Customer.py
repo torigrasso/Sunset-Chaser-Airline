@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import Error
 import json
 
+
 class Customer:
 
     def __init__(self, username, password=""):
@@ -57,8 +58,9 @@ class Customer:
             c.execute("UPDATE CUSTOMER SET SEATS=? WHERE USER=?", (seats_string, self.username))
             c.execute("UPDATE CUSTOMER SET SATISFACTION=? WHERE USER=?", (self.satisfaction, self.username))
 
-    def confirm_tickets(self, seats):
+    def confirm_tickets(self, seats, num):
         self.seats = seats
+        self.flight_num = num
         self.calculate_satisfaction(self.type)
         self.update_DB()
 
@@ -66,7 +68,7 @@ class Customer:
         pass
 
     def get_ticket_info(self):
-        return self.flight_num, self.type, self.seats
+        return str(self.flight_num), self.type, self.seats
 
     def get_seats(self):
         return self.seats

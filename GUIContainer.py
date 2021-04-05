@@ -7,7 +7,7 @@ from GUIPages import ManagerSignIn, ManagerPortal, ViewSeatsManager, EndFlight, 
 
 class GUIContainer(tk.Tk):
 
-    def __init__(self, user="", *args, **kwargs,):
+    def __init__(self, user="", type="", *args, **kwargs,):
         # __init__ function for class Tk
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -32,6 +32,7 @@ class GUIContainer(tk.Tk):
 
         # variable to know who is logged in and helps with page info related to user
         self.USER = user
+        self.USERTYPE = type
 
         # iterating through a tuple consisting
         # of the different page layouts
@@ -51,6 +52,6 @@ class GUIContainer(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-    def refresh_user(self, user):
+    def refresh_user(self, user, type):
         self.destroy()
-        self.__init__(user)
+        self.__init__(user, type)

@@ -50,7 +50,7 @@ class HomePage(tk.Frame):
                     if r[0] == user:
                         if str(r[1]) == pw:
                             # Navigate To Customer Portal
-                            controller.refresh_user(user)
+                            controller.refresh_user(user, "customer")
                             controller.show_frame(CustomerPortal)
                             return
 
@@ -98,7 +98,7 @@ class HomePage(tk.Frame):
                 Customer(user, pw1)
 
                 # Navigate To Manager Portal
-                controller.refresh_user(user)
+                controller.refresh_user(user, "customer")
                 controller.show_frame(CustomerPortal)
 
         sign_up = ttk.Label(self, text="Need an account? Sign up here")
@@ -201,7 +201,7 @@ class BuyTickets(tk.Frame):
                 type = travelerType(ticket_options.get())
                 with conn:
                     cursor.execute("UPDATE CUSTOMER SET TRAVEL_TYPE=? WHERE USER=?", (type, controller.USER))
-                controller.refresh_user(controller.USER)
+                controller.refresh_user(controller.USER, "customer")
                 controller.show_frame(ConfirmSeats)
 
         s = tk.StringVar()
@@ -268,7 +268,7 @@ class ConfirmSeats(tk.Frame):
         global index
         index = 0
 
-        if controller.USER != '':
+        if controller.USER != '' and controller.USERTYPE == "customer":
             seats = f.get_seats()
             user = Customer(controller.USER)
             if user.type != "None":
@@ -287,7 +287,7 @@ class ConfirmSeats(tk.Frame):
 
             def confirm():
                 f.confirm([options[index]], controller.USER)
-                controller.refresh_user(controller.USER)
+                controller.refresh_user(controller.USER, "customer")
                 controller.show_frame(TicketGenerated)
 
             def next():
@@ -311,8 +311,6 @@ class TicketGenerated(tk.Frame):
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
         home_button.grid(row=0, column=0, pady=10)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
         sign_out_button.grid(row=0, column=2, pady=10)
 
@@ -329,6 +327,39 @@ class TicketGenerated(tk.Frame):
         title2.grid(row=3, column=0, padx=20, pady=2, columnspan=3)
 
         # ----Display Ticket Info----
+        title3 = ttk.Label(self, text="Ticket(s) Confirmed!")
+        title3.grid(row=4, column=0, padx=30, pady=2, columnspan=3)
+
+        if controller.USER != '' and controller.USERTYPE == "customer":
+            user = Customer(controller.USER)
+            f = Flight()
+
+            name_label = ttk.Label(self, text="Name:")
+            name_label.grid(row=5, column=0, pady=10)
+            name = ttk.Label(self, text=user.username)
+            name.grid(row=5, column=1, columnspan=2)
+
+            num, t, seat_list = user.get_ticket_info()
+
+            flight_label = ttk.Label(self, text="Flight #")
+            flight_label.grid(row=6, column=0, pady=10)
+            flight = ttk.Label(self, text=num)
+            flight.grid(row=6, column=1, columnspan=2)
+
+            type_label = ttk.Label(self, text="Traveler Type:")
+            type_label.grid(row=7, column=0, pady=10)
+            type = ttk.Label(self, text=t)
+            type.grid(row=7, column=1, columnspan=2)
+
+            seats_label = ttk.Label(self, text="Seats:")
+            seats_label.grid(row=8, column=0, pady=10)
+
+            seat_string = ""
+            for seat in seat_list:
+                seat_string += f.get_seat_number(seat) + ", "
+
+            seats = ttk.Label(self, text=seat_string)
+            seats.grid(row=8, column=1, columnspan=2)
 
 
 class ViewSeatsCustomer(tk.Frame):
@@ -357,25 +388,28 @@ class ViewSeatsCustomer(tk.Frame):
         title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
         title2 = ttk.Label(self, text="Customer Portal")
         title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+
+        if controller.USER != '' and controller.USERTYPE == "customer":
         # ----Ticket Info----
 
 
         # ----Seat View----
-        f = Flight()
-        seats = f.get_seats()
-        r = 4
-        c = 0
-        for i in range(len(seats)):
-            if seats[i] == controller.USER:
-                color = 'green'
-            else:
-                color = 'black'
-            s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
-            s.grid(row=r, column=c, padx=5, pady=5)
-            c += 1
-            if c == 12:
-                c = 0
-                r += 1
+
+            f = Flight()
+            seats = f.get_seats()
+            r = 4
+            c = 0
+            for i in range(len(seats)):
+                if seats[i] == controller.USER:
+                    color = 'green'
+                else:
+                    color = 'black'
+                s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
+                s.grid(row=r, column=c, padx=5, pady=5)
+                c += 1
+                if c == 12:
+                    c = 0
+                    r += 1
 
 
 # ---------- Manager Pages ----------
@@ -409,7 +443,7 @@ class ManagerSignIn(tk.Frame):
                     if r[0] == user:
                         if str(r[1]) == pw:
                             # Navigate To Manager Portal
-                            controller.refresh_user(user)
+                            controller.refresh_user(user, "manager")
                             controller.show_frame(ManagerPortal)
                             return
 
@@ -458,7 +492,7 @@ class ManagerSignIn(tk.Frame):
                 Manager(user, pw1, code)
 
                 # Navigate To Manager Portal
-                controller.refresh_user(user)
+                controller.refresh_user(user, "manager")
                 controller.show_frame(ManagerPortal)
 
         sign_up = ttk.Label(self, text="Need an account? Sign up here")
