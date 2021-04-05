@@ -38,7 +38,8 @@ class Customer:
             with conn:
                 c.execute(insert_string, [str(self.username), str(self.password), self.satisfaction])
 
-    def create_connection(self, file):
+    @staticmethod
+    def create_connection(file):
         conn = None
         try:
             conn = sqlite3.connect(file)
@@ -72,4 +73,3 @@ class Customer:
 
     def get_seats(self):
         return self.seats
-

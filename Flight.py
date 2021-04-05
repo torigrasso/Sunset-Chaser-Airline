@@ -4,6 +4,7 @@ from random import randint
 import json
 from Customer import Customer
 
+
 class Flight:
 
     def __init__(self):
@@ -33,8 +34,8 @@ class Flight:
                            "17C", "17D", "17C", "17E", "17F", "18A", "18B", "18C", "18D", "18E", "18F", "19A", "19B",
                            "19C", "19D", "19C", "19E", "19F", "20A", "20B", "20C", "20D", "20E", "20F"]
 
-    # Connect to the DB
-    def create_connection(self, file):
+    @staticmethod
+    def create_connection(file):
         conn = None
         try:
             conn = sqlite3.connect(file)
