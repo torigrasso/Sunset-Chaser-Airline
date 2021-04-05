@@ -10,9 +10,6 @@ from Manager import Manager
 from Flight import Flight
 
 
-# controller.USER after a refresh will give the user
-
-
 # Connect to DB
 def create_connection(file):
     conn = None
@@ -163,6 +160,9 @@ class BuyTickets(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        conn = create_connection("airline.db")
+        cursor = conn.cursor()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
         home_button.grid(row=0, column=0, pady=10)
@@ -186,6 +186,24 @@ class BuyTickets(tk.Frame):
         title3.grid(row=4, column=0, padx=20, pady=2, columnspan=3)
 
         # ----Ticket Options----
+        def travelerType(selection):
+            if selection == 'Business Traveler (1) - Business Select':
+                return "BT-BS"
+            elif selection == 'Business Traveler (1) - Normal Seating':
+                return "BT-N"
+            elif selection == 'Tourist Travelers (2)':
+                return "TT"
+            else:
+                return "FT"
+
+        def updateTraveler():
+            if ticket_options.get() != '':
+                type = travelerType(ticket_options.get())
+                with conn:
+                    cursor.execute("UPDATE CUSTOMER SET TRAVEL_TYPE=? WHERE USER=?", (type, controller.USER))
+                controller.refresh_user(controller.USER)
+                controller.show_frame(ConfirmSeats)
+
         s = tk.StringVar()
         ticket_options = ttk.Combobox(self, state="readonly", width=27, textvariable=s)
         ticket_options['values'] = ('Business Traveler (1) - Business Select',
@@ -197,7 +215,7 @@ class BuyTickets(tk.Frame):
 
         ticket_options.grid(row=5, column=0, pady=20, columnspan=3)
         ticket_options.current(0)
-        submit = ttk.Button(self, text="Submit", command=lambda: controller.show_frame(ConfirmSeats))
+        submit = ttk.Button(self, text="Submit", command=lambda: updateTraveler())
         submit.grid(row=6, column=0, columnspan=3, padx=10)
 
 
@@ -205,13 +223,16 @@ class ConfirmSeats(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        conn = create_connection("airline.db")
+        cursor = conn.cursor()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10)
+        home_button.grid(row=0, column=0, pady=10, columnspan=3)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
+        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -219,13 +240,68 @@ class ConfirmSeats(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=3)
+        img.grid(row=1, column=0, padx=100, columnspan=12)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=3)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
         title2 = ttk.Label(self, text="Customer Portal")
-        title2.grid(row=3, column=0, padx=20, pady=2, columnspan=3)
+        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
 
-        # ----Show Seat Options & Confirm Button----
+        def display_seats(pos):
+            r = 4
+            c = 0
+            for i in range(len(seats)):
+                if i == options[pos]:
+                    color = 'green'
+                elif seats[i] != 'None':
+                    color = 'red'
+                else:
+                    color = 'black'
+                s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
+                s.grid(row=r, column=c, padx=5, pady=5)
+                c += 1
+                if c == 12:
+                    c = 0
+                    r += 1
+
+        # ----Show Seat Options & New/Confirm Button----
+        f = Flight()
+        global index
+        index = 0
+
+        if controller.USER != '':
+            seats = f.get_seats()
+            user = Customer(controller.USER)
+            if user.type != "None":
+                options = []
+                if user.type == "BT-BS":
+                    options = f.add_business(user.username, True)
+                elif user.type == "BT-N":
+                    options = f.add_business(user.username, False)
+                elif user.type == "TT":
+                    options = []
+                elif user.type == "FT":
+                    options = []
+
+                # display seats
+                display_seats(index)
+
+            def confirm():
+                f.confirm([options[index]], controller.USER)
+                controller.refresh_user(controller.USER)
+                controller.show_frame(TicketGenerated)
+
+            def next():
+                global index
+                index += 1
+                if index == len(options):
+                    index = 0
+                # display seats
+                display_seats(index)
+
+            new_button = ttk.Button(self, text="New Seat(s)", command=lambda: next())
+            new_button.grid(row=15, column=0, pady=20, columnspan=5)
+            confirm_button = ttk.Button(self, text="Confirm Seat(s)", command=lambda: confirm())
+            confirm_button.grid(row=15, column=6, pady=20, columnspan=6)
 
 
 class TicketGenerated(tk.Frame):
@@ -259,13 +335,16 @@ class ViewSeatsCustomer(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        conn = create_connection("airline.db")
+        cursor = conn.cursor()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10)
+        home_button.grid(row=0, column=0, pady=10, columnspan=3)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
+        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -273,16 +352,33 @@ class ViewSeatsCustomer(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=3)
+        img.grid(row=1, column=0, padx=100, columnspan=12)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=3)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
         title2 = ttk.Label(self, text="Customer Portal")
-        title2.grid(row=3, column=0, padx=20, pady=2, columnspan=3)
+        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        # ----Ticket Info----
 
-        # ----Seat View / Ticket View----
+
+        # ----Seat View----
+        f = Flight()
+        seats = f.get_seats()
+        r = 4
+        c = 0
+        for i in range(len(seats)):
+            if seats[i] == controller.USER:
+                color = 'green'
+            else:
+                color = 'black'
+            s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
+            s.grid(row=r, column=c, padx=5, pady=5)
+            c += 1
+            if c == 12:
+                c = 0
+                r += 1
 
 
-# ------- Manager Pages -------
+# ---------- Manager Pages ----------
 
 class ManagerSignIn(tk.Frame):
     def __init__(self, parent, controller):
@@ -540,7 +636,7 @@ class SatisfactoryScore(tk.Frame):
         info2.grid(row=5, column=0, padx=5, columnspan=12)
 
         # get previous flight score
-        flight_num = f.number - 1
+        flight_num = f.number #- 1
         with conn:
             cursor.execute("SELECT * FROM FLIGHT WHERE NUMBER=?", (flight_num,))
 

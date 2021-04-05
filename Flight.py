@@ -1,6 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 from random import randint
+import json
+from Customer import Customer
 
 class Flight:
 
@@ -17,12 +19,9 @@ class Flight:
 
         self.number = rows[0][0]
         self.score = rows[0][1]
-        seat_string = rows[0][2]
-
-        self.seats = seat_string.split(",")
-        self.active = True
-
-        self.customer_list = rows[0][3]
+        self.seats = json.loads(rows[0][2])
+        self.active = rows[0][3]
+        self.customer_list = json.loads(rows[0][4])
 
         self.seat_names = ["1A", "1B", "1C", "1D", "1E", "1F", "2A", "2B", "2C", "2D", "2E", "2F", "3A", "3B", "3C",
                            "3D", "3E", "3F", "4A", "4B", "4C", "4D", "4E", "4F", "5A", "5B", "5C", "5D", "5E", "5F",
@@ -46,27 +45,31 @@ class Flight:
     def update_DB(self):
         conn = self.create_connection("airline.db")
         c = conn.cursor()
-
+        seats_string = json.dumps(self.seats)
+        customer_string = json.dumps(self.customer_list)
         # get the current flight's info
         with conn:
             c.execute("UPDATE FLIGHT SET SCORE=? WHERE NUMBER=?", (self.score, self.number))
-            c.execute("UPDATE FLIGHT SET SEATS=? WHERE NUMBER=?", (self.seats, self.number))
-            c.execute("UPDATE FLIGHT SET ACTIVE=? WHERE NUMBER=?", (self.active, self.number))
-            c.execute("UPDATE FLIGHT SET CUSTOMERS=? WHERE NUMBER=?", (self.customer_list, self.number))
+            c.execute("UPDATE FLIGHT SET SEATS=? WHERE NUMBER=?", (seats_string, self.number))
+            c.execute("UPDATE FLIGHT SET CUSTOMERS=? WHERE NUMBER=?", (customer_string, self.number))
+            c.execute("UPDATE FLIGHT SET ACTIVE=? WHERE NUMBER=?", (str(self.active), self.number))
 
     def create_new_flight(self):
         self.seats = ['None']*120
-        self.active = True
+        self.active = 'True'
         self.number += 1
         self.customer_list = ['']
 
         conn = self.create_connection("airline.db")
         c = conn.cursor()
 
+        seats_string = json.dumps(self.seats)
+        customer_string = json.dumps(self.customer_list)
+
         # Add To Database
         insert_string = "INSERT INTO FLIGHT (NUMBER, SCORE, SEATS, ACTIVE, CUSTOMERS) VALUES (?, ? , ?, ?, ?)"
         with conn:
-            c.execute(insert_string, [self.number, self.score, self.seats, self.active, self.customer_list])
+            c.execute(insert_string, [self.number, self.score, seats_string, str(self.active), customer_string])
 
         # initiate again
         self.__init__()
@@ -84,41 +87,51 @@ class Flight:
 
         # traveler chooses to sit in business select
         if business_select:
-
             # loop through the first two rows
             for i in range(0,13):
-                if self.seats[i] is None:
+                if self.seats[i] == 'None':
+                    options.append(i)
 
-                    self.seats[i] = user
-                    return self.seats[i]
+                if len(options) == 3:
+                    return options
 
             # if nothing was found in business select
             for i in range(13, len(self.seats)):
-                if self.seats[i] is None:
-
-                    self.seats[i] = user
-                    return self.seats[i]
+                if self.seats[i] == 'None':
+                    options.append(i)
+                if len(options) == 3:
+                    return options
 
         else:
-
+            # loop through the first two rows
             for i in range(13, len(self.seats)):
-                if self.seats[i] is None:
-
-                    self.seats[i] = user
-                    return self.seats[i]
+                if self.seats[i] == 'None':
+                    options.append(i)
+                if len(options) == 3:
+                    return options
 
             # if nothing was found in normal seating
             for i in range(0,13):
-                if self.seats[i] is None:
+                if self.seats[i] == 'None':
+                    options.append(i)
+                if len(options) == 3:
+                    return options
 
-                    self.seats[i] = user
-                    return self.seats[i]
+        return options
 
-    def reassign(self):
-        pass
+    def confirm(self, seats, user):
+        # assign seat
+        for s in seats:
+            self.seats[s] = user
+        # add to customer list
+        if user not in self.customer_list:
+            self.customer_list.append(user)
+        # update the database
+        self.update_DB()
 
-    def confirm(self, seat, user):
-        self.seats[seat] = user
+        # update customer's information
+        c = Customer(user)
+        c.confirm_tickets(seats)
 
     def add_tourist(self, user):
         pass
@@ -127,7 +140,7 @@ class Flight:
         pass
 
     def end_flight(self):
-        self.active = False
+        self.active = 'False'
         self.calculate_satisfactory_score()
 
         self.update_DB()
