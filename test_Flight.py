@@ -2,7 +2,7 @@ import unittest
 from Flight import Flight
 
 
-class MyTestCase(unittest.TestCase):
+class FlightTest(unittest.TestCase):
 
     def test_addBussinessSelect(self):
         flight = Flight()
@@ -21,12 +21,15 @@ class MyTestCase(unittest.TestCase):
 
     def test_addFamilyOne(self):
         flight = Flight()
+        options = flight.add_family(1)
 
     def test_addFamilyTwo(self):
         flight = Flight()
+        options = flight.add_family(2)
 
     def test_addFamilyThree(self):
         flight = Flight()
+        options = flight.add_family(3)
 
 
 if __name__ == '__main__':
