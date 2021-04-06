@@ -44,17 +44,18 @@ class Flight:
             if (i+1) % 6 == 0:
                 self.right_window_seats.append(i)
 
-        self.aisle_seats = []
+        self.left_aisle_seats = []
+        self.right_aisle_seats = []
         for i in range(120):
             # Make sure not a window seat
             if i not in self.left_window_seats:
                 if i not in self.right_window_seats:
                     # Left aisle seat
                     if (i+1) % 3 == 0:
-                        self.aisle_seats.append(i)
+                        self.left_aisle_seats.append(i)
                     # Right aisle seat
                     if i % 3 == 0:
-                        self.aisle_seats.append(i)
+                        self.right_aisle_seats.append(i)
 
     @staticmethod
     def create_connection(file):
@@ -260,11 +261,9 @@ class Flight:
                 temp.pop(randomI)
 
         # calculate results by traveler type
-        #for customer in groups:
+        total = 0
+        for customer in groups:
+            user = Customer(customer)
+            total += user.satisfaction
 
-
-
-
-
-        # set self.score
-
+        self.score = total / len(groups)

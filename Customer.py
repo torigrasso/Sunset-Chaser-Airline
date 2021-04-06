@@ -62,28 +62,28 @@ class Customer:
     def confirm_tickets(self, seats, num):
         self.seats = seats
         self.flight_num = num
-        self.calculate_satisfaction(self.type)
+        self.satisfaction = self.calculate_satisfaction(self.type)
         self.update_DB()
 
-    def calculate_satisfaction(self, travelType):
+    def calculate_satisfaction(self):
         score = 0
 
         # Prefer Business Select section
-        if travelType == "BT-BS":
+        if self.type == "BT-BS":
             if 0 <= int(self.seats[0]) <= 11:
                 score = 0
             else:
                 score = -5
 
         # Prefer normal section
-        elif travelType == "BT-N":
+        elif self.type == "BT-N":
             if int(self.seats[0]) >= 12:
                 score = 0
             else:
                 score = -5
 
         # Travel in twos and prefer to stay together and at least one window seat
-        elif travelType == "TT":
+        elif self.type == "TT":
             seat1 = int(self.seats[0])
             seat2 = int(self.seats[1])
 
@@ -98,7 +98,7 @@ class Customer:
                 score += 5
 
         # Travel two adults with 1-3 kids. Prefer to stay together and as many aisle seats as possible
-        elif travelType == "FT-1" or travelType == "FT-2" or travelType == "FT-3":
+        elif self.type == "FT-1" or self.type == "FT-2" or self.type == "FT-3":
 
             # Aisle seat preference
             for seat in self.seats:
@@ -107,25 +107,48 @@ class Customer:
                     # check that it is not window seat
                     if (int(seat) % 6 != 0) and ((int(seat)+1) % 6 != 0):
                         score += 5
+                        break
 
             # Grouping seat preference
-            if travelType == "FT-1":
+            broken_up = True
+
+            if self.type == "FT-1":
                 adult1 = int(self.seats[0])
                 adult2 = int(self.seats[1])
                 child1 = int(self.seats[2])
 
-            elif travelType == "FT-2":
+                if abs(adult1 - adult2) == 1:
+                    if abs(adult2 - child1) == 1:
+                        broken_up = False
+
+            elif self.type == "FT-2":
                 adult1 = int(self.seats[0])
                 adult2 = int(self.seats[1])
                 child1 = int(self.seats[2])
                 child2 = int(self.seats[3])
 
-            elif travelType == "FT-3":
+                if abs(adult1 - adult2) == 1:
+                    if abs(adult2 - child1) == 1:
+                        if abs(child1 - child2) == 1:
+                            broken_up = False
+
+            elif self.type == "FT-3":
                 adult1 = int(self.seats[0])
                 adult2 = int(self.seats[1])
                 child1 = int(self.seats[2])
                 child2 = int(self.seats[3])
                 child3 = int(self.seats[4])
+
+                if abs(adult1 - adult2) == 1:
+                    if abs(adult2 - child1) == 1:
+                        if abs(child1 - child2) == 1:
+                            if abs(child2 - child3) == 1:
+                                broken_up = False
+
+            if broken_up is True:
+                score -= 10
+            else:
+                score += 10
 
         return score
 
