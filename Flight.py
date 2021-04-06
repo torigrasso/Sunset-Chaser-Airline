@@ -34,6 +34,28 @@ class Flight:
                            "17C", "17D", "17C", "17E", "17F", "18A", "18B", "18C", "18D", "18E", "18F", "19A", "19B",
                            "19C", "19D", "19C", "19E", "19F", "20A", "20B", "20C", "20D", "20E", "20F"]
 
+        self.left_window_seats = []
+        self.right_window_seats = []
+        for i in range(120):
+            # Left window seat
+            if i % 6 == 0:
+                self.left_window_seats.append(i)
+            # Right window seat
+            if (i+1) % 6 == 0:
+                self.right_window_seats.append(i)
+
+        self.aisle_seats = []
+        for i in range(120):
+            # Make sure not a window seat
+            if i not in self.left_window_seats:
+                if i not in self.right_window_seats:
+                    # Left aisle seat
+                    if (i+1) % 3 == 0:
+                        self.aisle_seats.append(i)
+                    # Right aisle seat
+                    if i % 3 == 0:
+                        self.aisle_seats.append(i)
+
     @staticmethod
     def create_connection(file):
         conn = None
@@ -95,7 +117,7 @@ class Flight:
         c = Customer(user)
         c.confirm_tickets(seats, self.number)
 
-    def add_business(self, user, business_select):
+    def add_business(self,business_select):
 
         # give the user three options if possible
         options = []
@@ -103,7 +125,7 @@ class Flight:
         # traveler chooses to sit in business select
         if business_select:
             # loop through the first two rows
-            for i in range(0,13):
+            for i in range(0,12):
                 if self.seats[i] == 'None':
                     options.append(i)
 
@@ -111,36 +133,106 @@ class Flight:
                     return options
 
             # if nothing was found in business select
-            for i in range(13, len(self.seats)):
+            for i in range(12, len(self.seats)):
                 if self.seats[i] == 'None':
                     options.append(i)
                 if len(options) == 3:
                     return options
 
         else:
-            # loop through the first two rows
-            for i in range(13, len(self.seats)):
+            # loop through everything but the first two rows
+            for i in range(12, len(self.seats)):
                 if self.seats[i] == 'None':
                     options.append(i)
                 if len(options) == 3:
                     return options
 
             # if nothing was found in normal seating
-            for i in range(0,13):
+            for i in range(0,12):
                 if self.seats[i] == 'None':
                     options.append(i)
                 if len(options) == 3:
                     return options
 
+        # if options returns [] then the flight is full
         return options
 
-    def add_tourist(self, user):
+    def add_tourist(self):
         # give the user three options if possible
         options = []
 
+        # NORMAL SEATING---------------------------------------------------------
 
+        # LEFT WINDOW PREFERENCE AND GROUP TOGETHER
+        for seat in self.left_window_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat+1] == 'None':
+                    options.append([seat, seat+1])
+                if len(options) == 3:
+                    return options
 
-    def add_family(self, user, child_count):
+        # RIGHT WINDOW PREFERENCE AND GROUP TOGETHER
+        for seat in self.right_window_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat - 1] == 'None':
+                    options.append([seat, seat + 1])
+                if len(options) == 3:
+                    return options
+
+        # GROUP TOGETHER NO WINDOW PREFERENCE
+        for i in range(12, 120):
+            if self.seats[i] == 'None' and self.seats[i + 1] == 'None':
+                options.append([i, i+1])
+            if len(options) == 3:
+                return options
+
+        # BUSINESS SELECT---------------------------------------------------------
+
+        # LEFT WINDOW PREFERENCE AND GROUP TOGETHER
+        for seat in self.left_window_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat+1] == 'None':
+                    options.append([seat, seat+1])
+                if len(options) == 3:
+                    return options
+            # stop loop once business select is done
+            else:
+                break
+
+        # RIGHT WINDOW PREFERENCE AND GROUP TOGETHER
+        for seat in self.right_window_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat-1] == 'None':
+                    options.append([seat, seat+1])
+                if len(options) == 3:
+                    return options
+            # stop loop once business select is done
+            else:
+                break
+
+        # GROUP TOGETHER NO WINDOW PREFERENCE
+        for i in range(0, 12):
+            if self.seats[i] == 'None' and self.seats[i + 1] == 'None':
+                options.append([i, i+1])
+            if len(options) == 3:
+                return options
+
+        # ENTIRE FLIGHT ---------------------------------------------------------
+        # NO PREFERENCE
+        temp = []
+        for i in range(0, 120):
+            if self.seats[i] == 'None':
+                temp.append(i)
+                if len(temp) == 2:
+                    options.append(temp)
+                    temp = []
+            if len(options) == 3:
+                return options
+
+        # if options returns [] then the flight is full
+        return options
+
+    def add_family(self, child_count):
         # give the user three options if possible
         options = []
 
@@ -151,6 +243,7 @@ class Flight:
         self.update_DB()
 
     def calculate_satisfactory_score(self):
+
         if len(self.customer_list < 10):
             groups = self.customer_list
         else:

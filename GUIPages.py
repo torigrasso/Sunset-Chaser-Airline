@@ -193,8 +193,12 @@ class BuyTickets(tk.Frame):
                 return "BT-N"
             elif selection == 'Tourist Travelers (2)':
                 return "TT"
-            else:
-                return "FT"
+            elif selection == 'Family Travelers (2 adults + 1 child)':
+                return "FT-1"
+            elif selection == 'Family Travelers (2 adults + 2 child)':
+                return "FT-2"
+            elif selection == 'Family Travelers (2 adults + 3 child)':
+                return "FT-2"
 
         def updateTraveler():
             if ticket_options.get() != '':
@@ -223,16 +227,13 @@ class ConfirmSeats(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        conn = create_connection("airline.db")
-        cursor = conn.cursor()
-
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10, columnspan=3)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
+        flight_label.grid(row=0, column=2, pady=5, columnspan=3)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
+        sign_out_button.grid(row=0, column=5, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -240,13 +241,13 @@ class ConfirmSeats(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=12)
+        img.grid(row=1, column=0, padx=100, columnspan=7)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=7)
         title2 = ttk.Label(self, text="Customer Portal")
-        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=7)
 
-        def display_seats(pos):
+        def display_business(pos):
             r = 4
             c = 0
             for i in range(len(seats)):
@@ -256,10 +257,35 @@ class ConfirmSeats(tk.Frame):
                     color = 'red'
                 else:
                     color = 'black'
+
                 s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
-                s.grid(row=r, column=c, padx=5, pady=5)
+                s.grid(row=r, column=c, padx=1, pady=1)
+
                 c += 1
-                if c == 12:
+                if c == 6:
+                    c = 0
+                    r += 1
+
+        def display_group(pos):
+            r = 4
+            c = 0
+            for i in range(len(seats)):
+                for j in options[pos]:
+                    if i == j:
+                        color = 'green'
+                        break
+
+                if seats[i] != 'None':
+                    color = 'red'
+                elif seats[i] == 'None':
+                    if i not in options[pos]:
+                        color = 'black'
+
+                s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
+                s.grid(row=r, column=c, padx=1, pady=1)
+
+                c += 1
+                if c == 6:
                     c = 0
                     r += 1
 
@@ -273,20 +299,32 @@ class ConfirmSeats(tk.Frame):
             user = Customer(controller.USER)
             if user.type != "None":
                 options = []
-                if user.type == "BT-BS":
-                    options = f.add_business(user.username, True)
-                elif user.type == "BT-N":
-                    options = f.add_business(user.username, False)
-                elif user.type == "TT":
-                    options = []
-                elif user.type == "FT":
-                    options = []
 
-                # display seats
-                display_seats(index)
+                if user.type == "BT-BS":
+                    options = f.add_business(True)
+                    # display seats
+                    display_business(index)
+                elif user.type == "BT-N":
+                    options = f.add_business(False)
+                    display_business(index)
+
+                elif user.type == "TT":
+                    options = f.add_tourist()
+                    display_group(index)
+
+                elif user.type == "FT-1":
+                    options = f.add_family(1)
+                elif user.type == "FT-1":
+                    options = f.add_family(2)
+                elif user.type == "FT-1":
+                    options = f.add_family(3)
 
             def confirm():
-                f.confirm([options[index]], controller.USER)
+                if user.type == "BT-BS" or user.type == "BT-N":
+                    f.confirm([options[index]], controller.USER)
+                else:
+                    f.confirm(options[index], controller.USER)
+
                 controller.refresh_user(controller.USER, "customer")
                 controller.show_frame(TicketGenerated)
 
@@ -296,12 +334,15 @@ class ConfirmSeats(tk.Frame):
                 if index == len(options):
                     index = 0
                 # display seats
-                display_seats(index)
+                if user.type == "BT-BS" or user.type == "BT-N":
+                    display_business(index)
+                else:
+                    display_group(index)
 
-            new_button = ttk.Button(self, text="New Seat(s)", command=lambda: next())
-            new_button.grid(row=15, column=0, pady=20, columnspan=5)
-            confirm_button = ttk.Button(self, text="Confirm Seat(s)", command=lambda: confirm())
-            confirm_button.grid(row=15, column=6, pady=20, columnspan=6)
+            new_button = ttk.Button(self, text="New", command=lambda: next())
+            new_button.grid(row=4, column=6, padx=2, rowspan=4)
+            confirm_button = ttk.Button(self, text="Confirm", command=lambda: confirm())
+            confirm_button.grid(row=8, column=6, padx=2, rowspan=4)
 
 
 class TicketGenerated(tk.Frame):
@@ -366,16 +407,11 @@ class ViewSeatsCustomer(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        conn = create_connection("airline.db")
-        cursor = conn.cursor()
-
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10, columnspan=3)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
+        sign_out_button.grid(row=0, column=5, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -383,18 +419,14 @@ class ViewSeatsCustomer(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=12)
+        img.grid(row=1, column=0, padx=100, columnspan=7)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=7)
         title2 = ttk.Label(self, text="Customer Portal")
-        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=7)
 
         if controller.USER != '' and controller.USERTYPE == "customer":
-        # ----Ticket Info----
-
-
-        # ----Seat View----
-
+            # ----Seat View----
             f = Flight()
             seats = f.get_seats()
             r = 4
@@ -405,11 +437,29 @@ class ViewSeatsCustomer(tk.Frame):
                 else:
                     color = 'black'
                 s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
-                s.grid(row=r, column=c, padx=5, pady=5)
+                s.grid(row=r, column=c, padx=1, pady=1)
                 c += 1
-                if c == 12:
+                if c == 6:
                     c = 0
                     r += 1
+            # ----Ticket Info----
+            c = Customer(controller.USER)
+
+            num, tType, seat_list = c.get_ticket_info()
+
+            f_string = "Flight #" + num
+            flight_label = ttk.Label(self, text=f_string)
+            flight_label.grid(row=4, column=6, pady=1)
+
+            type_string = "Traveler: " + tType
+            type_label = ttk.Label(self, text=type_string)
+            type_label.grid(row=5, column=6, pady=1)
+
+            seat_string = "Seats: "
+            for seat in seat_list:
+                seat_string += f.get_seat_number(seat) + ", "
+            seat_label = ttk.Label(self, text=seat_string)
+            seat_label.grid(row=6, column=6, pady=1)
 
 
 # ---------- Manager Pages ----------
@@ -529,11 +579,11 @@ class ManagerPortal(tk.Frame):
 
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
-        home_button.grid(row=0, column=0, pady=10)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
+        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -541,19 +591,19 @@ class ManagerPortal(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=3)
+        img.grid(row=1, column=0, padx=100, columnspan=6)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=3)
-        title2 = ttk.Label(self, text="Manager Portal")
-        title2.grid(row=3, column=0, padx=20, pady=2, columnspan=3)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=6)
+        title2 = ttk.Label(self, text="Manger Portal")
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         # ----Buttons----
         report_button = ttk.Button(self, text="Satisfactory Report", command=lambda: controller.show_frame(SatisfactoryScore))
-        report_button.grid(row=4, column=0, padx=20, pady=12, columnspan=3)
+        report_button.grid(row=4, column=0, padx=20, pady=12, columnspan=6)
         end_flight_button = ttk.Button(self, text="End Flight", command=lambda: controller.show_frame(EndFlight))
-        end_flight_button.grid(row=5, column=0, padx=20, pady=12, columnspan=3)
+        end_flight_button.grid(row=5, column=0, padx=20, pady=12, columnspan=6)
         view_seats_button = ttk.Button(self, text="View Seats", command=lambda: controller.show_frame(ViewSeatsManager))
-        view_seats_button.grid(row=6, column=0, padx=20, pady=12, columnspan=3)
+        view_seats_button.grid(row=6, column=0, padx=20, pady=12, columnspan=6)
 
 
 class EndFlight(tk.Frame):
@@ -562,11 +612,11 @@ class EndFlight(tk.Frame):
 
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
-        home_button.grid(row=0, column=0, pady=10, columnspan=3)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
+        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
-        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
+        sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -574,11 +624,11 @@ class EndFlight(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=12)
+        img.grid(row=1, column=0, padx=100, columnspan=6)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=6)
         title2 = ttk.Label(self, text="Manager Portal")
-        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         def endFlight():
             f = Flight()
@@ -599,11 +649,11 @@ class ViewSeatsManager(tk.Frame):
 
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
-        home_button.grid(row=0, column=0, pady=10, columnspan=3)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
+        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
-        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
+        sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -611,11 +661,11 @@ class ViewSeatsManager(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=12)
+        img.grid(row=1, column=0, padx=100, columnspan=6)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
-        title2 = ttk.Label(self, text="Manager Portal")
-        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=6)
+        title2 = ttk.Label(self, text="Manger Portal")
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         # ----Display Seat GUI----
         f = Flight()
@@ -628,9 +678,9 @@ class ViewSeatsManager(tk.Frame):
             else:
                 color = 'red'
             s = ttk.Label(self, text=f.get_seat_number(i), foreground=color)
-            s.grid(row=r, column=c, padx=5, pady=5)
+            s.grid(row=r, column=c, padx=1, pady=1)
             c += 1
-            if c == 12:
+            if c == 6:
                 c = 0
                 r += 1
 
@@ -645,11 +695,11 @@ class SatisfactoryScore(tk.Frame):
 
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
-        home_button.grid(row=0, column=0, pady=10, columnspan=3)
+        home_button.grid(row=0, column=0, pady=5, columnspan=2)
         flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=3, pady=10, columnspan=6)
+        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
-        sign_out_button.grid(row=0, column=9, pady=10, columnspan=3)
+        sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -657,17 +707,19 @@ class SatisfactoryScore(tk.Frame):
         render = ImageTk.PhotoImage(load)
         img = tk.Label(self, image=render)
         img.image = render
-        img.grid(row=1, column=0, padx=100, columnspan=12)
+        img.grid(row=1, column=0, padx=100, columnspan=6)
         title1 = ttk.Label(self, text="Sunset Chaser Airlines")
-        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=12)
-        title2 = ttk.Label(self, text="Manager Portal")
-        title2.grid(row=3, column=0, padx=20, pady=7, columnspan=12)
+        title1.grid(row=2, column=0, padx=20, pady=2, columnspan=6)
+        title2 = ttk.Label(self, text="Manger Portal")
+        title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         # ----Display Score----
-        info1 = ttk.Label(self, text="The Satisfaction Idex reflects a group of randomly chosen customers")
-        info2 = ttk.Label(self, text="and their satisfaction with the flight.")
-        info1.grid(row=4, column=0, padx=5, columnspan=12)
-        info2.grid(row=5, column=0, padx=5, columnspan=12)
+        info1 = ttk.Label(self, text="The Satisfaction Idex reflects")
+        info2 = ttk.Label(self, text="a group of randomly chosen customers")
+        info3 = ttk.Label(self, text="and their satisfaction with the flight.")
+        info1.grid(row=4, column=0, padx=5, columnspan=6)
+        info2.grid(row=5, column=0, padx=5, columnspan=6)
+        info3.grid(row=6, column=0, padx=5, columnspan=6)
 
         # get previous flight score
         flight_num = f.number #- 1
@@ -678,4 +730,4 @@ class SatisfactoryScore(tk.Frame):
         score = rows[0][1]
 
         score_label = tk.Label(self, text=str(score))
-        score_label.grid(row=6, column=0, pady=15, columnspan=12)
+        score_label.grid(row=7, column=0, pady=15, columnspan=12)

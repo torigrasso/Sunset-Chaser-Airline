@@ -65,16 +65,33 @@ class Customer:
         self.calculate_satisfaction(self.type)
         self.update_DB()
 
-    def calculate_satisfaction(self, type):
-        if type == "BT-BS":
-            pass
-        elif type == "BT-N":
-            pass
-        elif type == "TT":
-            pass
-        elif type == "FT":
+    def calculate_satisfaction(self, travelType):
+        score = 0
+
+        # Prefer Business Select section
+        if travelType == "BT-BS":
+            if 0 <= int(self.seats[0]) <= 11:
+                score = 0
+            else:
+                score = -5
+
+        # Prefer normal section
+        elif travelType == "BT-N":
+            if int(self.seats[0]) >= 12:
+                score = 0
+            else:
+                score = -5
+
+        # Travel in twos and prefer to stay together and at least one window seat
+        elif travelType == "TT":
+
             pass
 
+        # Travel two adults with 1-3 kids. Prefer to stay together and as many aisle seats as possible
+        elif travelType == "FT":
+            pass
+
+        return score
 
     def get_ticket_info(self):
         return str(self.flight_num), self.type, self.seats
