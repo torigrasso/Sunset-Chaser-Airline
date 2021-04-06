@@ -129,13 +129,16 @@ class CustomerPortal(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
+        home_button.grid(row=0, column=0, pady=5)
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
+        flight_label.grid(row=0, column=1, pady=5)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=2, pady=5)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -149,8 +152,15 @@ class CustomerPortal(tk.Frame):
         title2 = ttk.Label(self, text="Customer Portal")
         title2.grid(row=3, column=0, padx=20, pady=2, columnspan=3)
 
+        def buy_tickets():
+            customers = f.get_customers()
+            # only allow customers to get another ticket if they have not yet gotten one
+            # they will be able to get a new one when a new flight begins
+            if controller.USER not in customers:
+                controller.show_frame(BuyTickets)
+
         # ----Buttons----
-        get_tickets_button = ttk.Button(self, text="Get Tickets", command=lambda: controller.show_frame(BuyTickets))
+        get_tickets_button = ttk.Button(self, text="Get Tickets", command=lambda: buy_tickets())
         get_tickets_button.grid(row=4, column=0, padx=20, pady=12, columnspan=3)
         view_ticket_button = ttk.Button(self, text="View Seats", command=lambda: controller.show_frame(ViewSeatsCustomer))
         view_ticket_button.grid(row=5, column=0, padx=20, pady=12, columnspan=3)
@@ -162,14 +172,16 @@ class BuyTickets(tk.Frame):
 
         conn = create_connection("airline.db")
         cursor = conn.cursor()
+        f = Flight()
 
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=1, pady=10)
+        home_button.grid(row=0, column=0, pady=5)
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
+        flight_label.grid(row=0, column=1, pady=5)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=2, pady=5)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -227,10 +239,13 @@ class ConfirmSeats(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
         home_button.grid(row=0, column=0, pady=5, columnspan=2)
-        flight_label = ttk.Label(self, text="Flight NUM")
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
         flight_label.grid(row=0, column=2, pady=5, columnspan=3)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
         sign_out_button.grid(row=0, column=5, pady=5, columnspan=2)
@@ -290,7 +305,6 @@ class ConfirmSeats(tk.Frame):
                     r += 1
 
         # ----Show Seat Options & New/Confirm Button----
-        f = Flight()
         global index
         index = 0
 
@@ -349,11 +363,16 @@ class TicketGenerated(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(CustomerPortal))
-        home_button.grid(row=0, column=0, pady=10)
+        home_button.grid(row=0, column=0, pady=5)
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
+        flight_label.grid(row=0, column=1, pady=5)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(HomePage))
-        sign_out_button.grid(row=0, column=2, pady=10)
+        sign_out_button.grid(row=0, column=2, pady=5)
 
         # ----Logo and Titles----
         load = Image.open("logo.png")
@@ -373,34 +392,27 @@ class TicketGenerated(tk.Frame):
 
         if controller.USER != '' and controller.USERTYPE == "customer":
             user = Customer(controller.USER)
-            f = Flight()
 
-            name_label = ttk.Label(self, text="Name:")
-            name_label.grid(row=5, column=0, pady=10)
-            name = ttk.Label(self, text=user.username)
-            name.grid(row=5, column=1, columnspan=2)
+            name_string = "Name: " + user.username
+            name_label = ttk.Label(self, text=name_string)
+            name_label.grid(row=5, column=0, pady=10, columnspan=2)
 
             num, t, seat_list = user.get_ticket_info()
 
-            flight_label = ttk.Label(self, text="Flight #")
-            flight_label.grid(row=6, column=0, pady=10)
-            flight = ttk.Label(self, text=num)
-            flight.grid(row=6, column=1, columnspan=2)
+            flight_string = "Flight #" + num
+            flight_label = ttk.Label(self, text=flight_string)
+            flight_label.grid(row=6, column=0, pady=10, columnspan=2)
 
-            type_label = ttk.Label(self, text="Traveler Type:")
-            type_label.grid(row=7, column=0, pady=10)
-            type = ttk.Label(self, text=t)
-            type.grid(row=7, column=1, columnspan=2)
+            type_string = "Traveler Type:" + t
+            type_label = ttk.Label(self, text=type_string)
+            type_label.grid(row=7, column=0, pady=10, columnspan=2)
 
-            seats_label = ttk.Label(self, text="Seats:")
-            seats_label.grid(row=8, column=0, pady=10)
-
-            seat_string = ""
+            seat_string = "Seats: "
             for seat in seat_list:
                 seat_string += f.get_seat_number(seat) + ", "
 
             seats = ttk.Label(self, text=seat_string)
-            seats.grid(row=8, column=1, columnspan=2)
+            seats.grid(row=8, column=0, columnspan=2)
 
 
 class ViewSeatsCustomer(tk.Frame):
@@ -577,10 +589,13 @@ class ManagerPortal(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
         home_button.grid(row=0, column=0, pady=5, columnspan=2)
-        flight_label = ttk.Label(self, text="Flight NUM")
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
         flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
         sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
@@ -610,11 +625,11 @@ class EndFlight(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
         home_button.grid(row=0, column=0, pady=5, columnspan=2)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
         sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
@@ -631,13 +646,13 @@ class EndFlight(tk.Frame):
         title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         def endFlight():
-            f = Flight()
             f.end_flight()
             f.create_new_flight()
             controller.show_frame(ManagerPortal)
 
         # ----End The Flight----
-        confirm_text = ttk.Label(self, text="Are you sure you would like to end this flight?")
+        confirm_string = "Are you sure you would like to end Flight #" + str(f.number) + "?"
+        confirm_text = ttk.Label(self, text=confirm_string)
         confirm_text.grid(row=4, column=0, padx=20, pady=10, columnspan=12)
         confirm_button = ttk.Button(self, text="Confirm", command=lambda: endFlight())
         confirm_button.grid(row=5, column=0, padx=20, pady=2, columnspan=12)
@@ -647,10 +662,13 @@ class ViewSeatsManager(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        f = Flight()
+
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
         home_button.grid(row=0, column=0, pady=5, columnspan=2)
-        flight_label = ttk.Label(self, text="Flight NUM")
+        flight_string = "Flight #" + str(f.number)
+        flight_label = ttk.Label(self, text=flight_string)
         flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
         sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
@@ -668,7 +686,6 @@ class ViewSeatsManager(tk.Frame):
         title2.grid(row=3, column=0, padx=20, pady=5, columnspan=6)
 
         # ----Display Seat GUI----
-        f = Flight()
         seats = f.get_seats()
         r = 4
         c = 0
@@ -696,8 +713,6 @@ class SatisfactoryScore(tk.Frame):
         # ----Home/Current Flight/Sign Out----
         home_button = ttk.Button(self, text="Home", command=lambda: controller.show_frame(ManagerPortal))
         home_button.grid(row=0, column=0, pady=5, columnspan=2)
-        flight_label = ttk.Label(self, text="Flight NUM")
-        flight_label.grid(row=0, column=2, pady=5, columnspan=2)
         sign_out_button = ttk.Button(self, text="Sign Out", command=lambda: controller.show_frame(ManagerSignIn))
         sign_out_button.grid(row=0, column=4, pady=5, columnspan=2)
 
@@ -729,5 +744,6 @@ class SatisfactoryScore(tk.Frame):
         rows = cursor.fetchall()
         score = rows[0][1]
 
-        score_label = tk.Label(self, text=str(score))
+        score_string = "Flight #" + str(flight_num) + ": " + str(score)
+        score_label = tk.Label(self, text=score_string)
         score_label.grid(row=7, column=0, pady=15, columnspan=12)

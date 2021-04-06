@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/Flight.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flight.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUIPages.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUIPages.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/airline.db" beforeDir="false" afterPath="$PROJECT_DIR$/airline.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_Flight.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_Flight.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,19 +16,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUIPages.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="325" column="44" selection-start-line="325" selection-start-column="44" selection-end-line="325" selection-end-column="44" />
+            <state relative-caret-position="169">
+              <caret line="592" column="8" selection-start-line="592" selection-start-column="8" selection-end-line="592" selection-end-column="8" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#254#367#0" />
+                <element signature="e#433#4906#0" />
+                <element signature="e#4945#6488#0" />
+                <element signature="e#6523#9464#0" />
+                <element signature="e#9501#12824#0" />
                 <element signature="e#10957#11467#0" />
                 <element signature="e#11554#12242#0" />
+                <element signature="e#12864#15237#0" />
+                <element signature="e#15167#17534#0" />
                 <element signature="e#17246#22022#0" />
-                <element signature="e#22060#23802#0" />
                 <element signature="e#23836#25528#0" />
+                <element signature="e#25569#27214#0" />
                 <element signature="e#27256#29211#0" />
               </folding>
             </state>
@@ -39,15 +44,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flight.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="234" column="25" selection-start-line="234" selection-start-column="25" selection-end-line="234" selection-end-column="25" />
+            <state relative-caret-position="180">
+              <caret line="106" column="33" selection-start-line="106" selection-start-column="33" selection-end-line="106" selection-end-column="33" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#1690#1823#0" />
                 <element signature="e#1858#2479#0" />
                 <element signature="e#2522#3138#0" />
                 <element signature="e#3187#3217#0" />
-                <element signature="e#3252#3269#0" />
                 <element signature="e#3315#3672#0" />
                 <element signature="e#3734#4905#0" />
                 <element signature="e#5607#7527#0" />
@@ -56,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_Flight.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -71,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Customer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="77" column="31" lean-forward="true" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
+            <state relative-caret-position="501">
+              <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -104,8 +108,8 @@
         <option value="$PROJECT_DIR$/ManagerGUI.py" />
         <option value="$PROJECT_DIR$/GUIContainer.py" />
         <option value="$PROJECT_DIR$/Manager.py" />
-        <option value="$PROJECT_DIR$/Customer.py" />
         <option value="$PROJECT_DIR$/test_Flight.py" />
+        <option value="$PROJECT_DIR$/Customer.py" />
         <option value="$PROJECT_DIR$/Flight.py" />
         <option value="$PROJECT_DIR$/GUIPages.py" />
       </list>
@@ -342,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617601039489</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Tourist Traveler is complete.">
+      <created>1617679610865</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1617679610865</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -411,14 +422,15 @@
     <MESSAGE value="Progress made on Customer GUI and Flight/Customer Classes.&#10;business traveler seems to work.. need to to tourist and family." />
     <MESSAGE value="Added USERTYPE var to container...&#10;So I can decipher if a manager or customer is logged in." />
     <MESSAGE value="Made static methods out of the db connector functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made static methods out of the db connector functions" />
+    <MESSAGE value="Tourist Traveler is complete." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tourist Traveler is complete." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GUIPages.py</url>
-          <line>273</line>
+          <line>288</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
@@ -476,10 +488,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test_Flight.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Customer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="77" column="31" lean-forward="true" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
+        <state relative-caret-position="501">
+          <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -488,15 +510,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flight.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="234" column="25" selection-start-line="234" selection-start-column="25" selection-end-line="234" selection-end-column="25" />
+        <state relative-caret-position="180">
+          <caret line="106" column="33" selection-start-line="106" selection-start-column="33" selection-end-line="106" selection-end-column="33" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#1690#1823#0" />
             <element signature="e#1858#2479#0" />
             <element signature="e#2522#3138#0" />
             <element signature="e#3187#3217#0" />
-            <element signature="e#3252#3269#0" />
             <element signature="e#3315#3672#0" />
             <element signature="e#3734#4905#0" />
             <element signature="e#5607#7527#0" />
@@ -506,27 +527,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUIPages.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="325" column="44" selection-start-line="325" selection-start-column="44" selection-end-line="325" selection-end-column="44" />
+        <state relative-caret-position="169">
+          <caret line="592" column="8" selection-start-line="592" selection-start-column="8" selection-end-line="592" selection-end-column="8" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#254#367#0" />
+            <element signature="e#433#4906#0" />
+            <element signature="e#4945#6488#0" />
+            <element signature="e#6523#9464#0" />
+            <element signature="e#9501#12824#0" />
             <element signature="e#10957#11467#0" />
             <element signature="e#11554#12242#0" />
+            <element signature="e#12864#15237#0" />
+            <element signature="e#15167#17534#0" />
             <element signature="e#17246#22022#0" />
-            <element signature="e#22060#23802#0" />
             <element signature="e#23836#25528#0" />
+            <element signature="e#25569#27214#0" />
             <element signature="e#27256#29211#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_Flight.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

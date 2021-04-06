@@ -103,6 +103,9 @@ class Flight:
     def get_seats(self):
         return self.seats
 
+    def get_customers(self):
+        return self.customer_list
+
     def confirm(self, seats, user):
         # assign seat
         for s in seats:

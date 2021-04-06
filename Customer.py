@@ -84,12 +84,48 @@ class Customer:
 
         # Travel in twos and prefer to stay together and at least one window seat
         elif travelType == "TT":
+            seat1 = int(self.seats[0])
+            seat2 = int(self.seats[1])
 
-            pass
+            # grouped together
+            if abs(seat1 - seat2) == 1:
+                score += 10
+            else:
+                score -= 10
+
+            # window seat preference
+            if (seat1 % 6 == 0 or seat2 % 6 == 0) or ((seat1+1) % 6 == 0 or (seat2+1) % 6 == 0):
+                score += 5
 
         # Travel two adults with 1-3 kids. Prefer to stay together and as many aisle seats as possible
-        elif travelType == "FT":
-            pass
+        elif travelType == "FT-1" or travelType == "FT-2" or travelType == "FT-3":
+
+            # Aisle seat preference
+            for seat in self.seats:
+                # check if aisle seat
+                if (int(seat) % 3 == 0) or (int(seat)+1 % 3):
+                    # check that it is not window seat
+                    if (int(seat) % 6 != 0) and ((int(seat)+1) % 6 != 0):
+                        score += 5
+
+            # Grouping seat preference
+            if travelType == "FT-1":
+                adult1 = int(self.seats[0])
+                adult2 = int(self.seats[1])
+                child1 = int(self.seats[2])
+
+            elif travelType == "FT-2":
+                adult1 = int(self.seats[0])
+                adult2 = int(self.seats[1])
+                child1 = int(self.seats[2])
+                child2 = int(self.seats[3])
+
+            elif travelType == "FT-3":
+                adult1 = int(self.seats[0])
+                adult2 = int(self.seats[1])
+                child1 = int(self.seats[2])
+                child2 = int(self.seats[3])
+                child3 = int(self.seats[4])
 
         return score
 
