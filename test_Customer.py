@@ -4,26 +4,34 @@ from Customer import Customer
 
 class CustomerTest(unittest.TestCase):
 
-    def create_customer(self):
-        self.assertEqual(True, False)
+    def test_createCustomer(self):
+        Customer("newCustomer", "p@ssW0rd")
+        # check DB to see if it worked
 
-    def existing_customer(self):
-        pass
+    def test_existingCustomer(self):
+        user = Customer("user1")
+        self.assertEqual(user.username, "user1")
+        self.assertEqual(user.password, "12345")
 
-    def satisfaction_score_b(self):
-        pass
+    def test_satisfactionScoreB(self):
+        user = Customer("user7")
+        self.assertEqual(user.satisfaction, 0)
 
-    def satisfaction_score_t(self):
-        pass
+    def test_satisfactionScoreT(self):
+        user = Customer("user1")
+        self.assertEqual(user.satisfaction, 15)
 
-    def satisfaction_score_f1(self):
-        pass
+    def test_satisfactionScoreF1(self):
+        user = Customer("")
+        self.assertEqual(user.satisfaction, 15)
 
-    def satisfaction_score_f2(self):
-        pass
+    def test_satisfactionScoreF2(self):
+        user = Customer("")
+        self.assertEqual(user.satisfaction, 15)
 
-    def satisfaction_score_f3(self):
-        pass
+    def test_satisfactionScoreF3(self):
+        user = Customer("")
+        self.assertEqual(user.satisfaction, 15)
 
 
 if __name__ == '__main__':

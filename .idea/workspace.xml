@@ -5,6 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flight.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flight.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUIPages.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUIPages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/airline.db" beforeDir="false" afterPath="$PROJECT_DIR$/airline.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_Customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_Flight.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_Flight.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_Manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_Manager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,89 +19,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flight.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="242" column="25" selection-start-line="242" selection-start-column="25" selection-end-line="242" selection-end-column="25" />
+            <state relative-caret-position="563">
+              <caret line="354" selection-start-line="354" selection-end-line="354" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <element signature="e#1690#1823#0" />
-                <element signature="e#1858#2479#0" />
-                <element signature="e#2522#3138#0" />
-                <element signature="e#3187#3217#0" />
-                <element signature="e#3315#3672#0" />
-                <element signature="e#3734#4905#0" />
-                <element signature="e#5607#7527#0" />
-                <element signature="e#5165#5256#0" />
-                <element signature="e#8942#9614#0" />
+                <element signature="e#2521#2654#0" />
+                <element signature="e#2689#3310#0" />
+                <element signature="e#3353#3969#0" />
+                <element signature="e#4018#4048#0" />
+                <element signature="e#4083#4100#0" />
+                <element signature="e#4139#4164#0" />
+                <element signature="e#4622#5864#0" />
+                <element signature="e#5901#8654#0" />
+                <element signature="e#8712#8956#0" />
+                <element signature="e#8816#8851#0" />
+                <element signature="e#11446#13309#0" />
+                <element signature="e#8970#9005#0" />
+                <element signature="e#8825#8916#0" />
+                <element signature="e#8971#9631#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Customer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="134" column="26" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-                <element signature="e#2304#2408#0" />
-                <element signature="e#2759#3066#0" />
-                <element signature="e#3809#4115#0" />
-                <element signature="e#4188#4600#0" />
-                <element signature="e#4581#5059#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_Flight.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUIPages.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="587" column="30" selection-start-line="587" selection-start-column="30" selection-end-line="587" selection-end-column="30" />
+            <state relative-caret-position="515">
+              <caret line="338" column="40" selection-start-line="338" selection-start-column="40" selection-end-line="338" selection-end-column="40" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#254#367#0" />
-                <element signature="e#433#4906#0" />
-                <element signature="e#4945#6488#0" />
-                <element signature="e#6523#9464#0" />
-                <element signature="e#9501#12824#0" />
-                <element signature="e#10957#11467#0" />
-                <element signature="e#11554#12242#0" />
-                <element signature="e#12864#15237#0" />
-                <element signature="e#15167#17534#0" />
-                <element signature="e#17246#22022#0" />
-                <element signature="e#22060#23802#0" />
-                <element signature="e#23836#25528#0" />
-                <element signature="e#25569#27214#0" />
-                <element signature="e#27256#29211#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_Customer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#433#4908#0" />
+                <element signature="e#4947#6873#0" />
+                <element signature="e#11489#12001#0" />
+                <element signature="e#12047#12693#0" />
+                <element signature="e#13756#14078#0" />
+                <element signature="e#14120#14434#0" />
               </folding>
             </state>
           </provider>
@@ -126,19 +88,20 @@
         <option value="$PROJECT_DIR$/ManagerGUI.py" />
         <option value="$PROJECT_DIR$/GUIContainer.py" />
         <option value="$PROJECT_DIR$/Manager.py" />
-        <option value="$PROJECT_DIR$/GUIPages.py" />
-        <option value="$PROJECT_DIR$/test_Flight.py" />
-        <option value="$PROJECT_DIR$/test_Manager.py" />
-        <option value="$PROJECT_DIR$/test_Customer.py" />
         <option value="$PROJECT_DIR$/Customer.py" />
+        <option value="$PROJECT_DIR$/test_Flight.py" />
+        <option value="$PROJECT_DIR$/test_Customer.py" />
+        <option value="$PROJECT_DIR$/test_Manager.py" />
         <option value="$PROJECT_DIR$/Flight.py" />
+        <option value="$PROJECT_DIR$/GUIPages.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="219" />
     <option name="y" value="25" />
-    <option name="width" value="1440" />
-    <option name="height" value="799" />
+    <option name="width" value="1131" />
+    <option name="height" value="698" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -226,7 +189,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_Flight.MyTestCase.test_addBussiness" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Sunset-Chaser" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -236,11 +199,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Flight.MyTestCase.test_addBussiness&quot;" />
+      <option name="_new_target" value="&quot;test_Customer.CustomerTest.test_satisfaction_score_b&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_Flight.MyTestCase.test_addBussinessNormal" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyOne" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Sunset-Chaser" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -250,11 +213,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Flight.MyTestCase.test_addBussinessNormal&quot;" />
+      <option name="_new_target" value="&quot;test_Flight.FlightTest.test_addFamilyOne&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_Flight.MyTestCase.test_addBussinessSelect" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyThree" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Sunset-Chaser" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -264,7 +227,21 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Flight.MyTestCase.test_addBussinessSelect&quot;" />
+      <option name="_new_target" value="&quot;test_Flight.FlightTest.test_addFamilyThree&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyTwo" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Sunset-Chaser" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_Flight.FlightTest.test_addFamilyTwo&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -285,17 +262,19 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.multipleWindowsExample" />
-      <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussiness" />
-      <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussinessSelect" />
-      <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussinessNormal" />
       <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addTourist" />
+      <item itemvalue="Python tests.Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" />
+      <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyOne" />
+      <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyTwo" />
+      <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyThree" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyThree" />
+        <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyTwo" />
+        <item itemvalue="Python tests.Unittests for test_Flight.FlightTest.test_addFamilyOne" />
+        <item itemvalue="Python tests.Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" />
         <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addTourist" />
-        <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussinessNormal" />
-        <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussinessSelect" />
-        <item itemvalue="Python tests.Unittests for test_Flight.MyTestCase.test_addBussiness" />
       </list>
     </recent_temporary>
   </component>
@@ -387,52 +366,59 @@
       <option name="project" value="LOCAL" />
       <updated>1617684303529</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Satisfaction polling is now functional.&#10;Might need to adjust scoring of tourist/family when seats loop around.">
+      <created>1617685144796</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617685144797</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addBussiness - 2021.04.04 at 23h 53m 23s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addBussiness" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 04m 38s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addBussinessSelect - 2021.04.04 at 23h 56m 06s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addBussinessSelect" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 04m 42s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addBussinessSelect - 2021.04.04 at 23h 58m 14s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addBussinessSelect" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 04m 52s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addBussinessNormal - 2021.04.04 at 23h 58m 18s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addBussinessNormal" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 05m 01s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 20h 34m 09s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 05m 52s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 20h 35m 43s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Customer_CustomerTest_test_satisfaction_score_b - 2021.04.06 at 01h 05m 59s.xml">
+      <configuration name="Unittests for test_Customer.CustomerTest.test_satisfaction_score_b" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 20h 37m 58s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Flight_FlightTest_test_addFamilyOne - 2021.04.07 at 10h 18m 14s.xml">
+      <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyOne" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 20h 56m 38s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Flight_FlightTest_test_addFamilyTwo - 2021.04.07 at 10h 18m 20s.xml">
+      <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyTwo" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 20h 59m 50s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Flight_FlightTest_test_addFamilyThree - 2021.04.07 at 10h 18m 26s.xml">
+      <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyThree" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_Flight_MyTestCase_test_addTourist - 2021.04.05 at 21h 08m 48s.xml">
-      <configuration name="Unittests for test_Flight.MyTestCase.test_addTourist" configurationId="tests" />
+    <history-entry file="Unittests_for_test_Flight_FlightTest_test_addFamilyThree - 2021.04.07 at 10h 18m 31s.xml">
+      <configuration name="Unittests for test_Flight.FlightTest.test_addFamilyThree" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1440" height="799" extended-state="0" />
+    <frame x="219" y="25" width="1131" height="698" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.136716" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17477478" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="DB Browser" order="3" weight="0.3291367" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952926" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34664765" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39657632" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -459,17 +445,11 @@
     <MESSAGE value="Tourist Traveler is complete." />
     <MESSAGE value="GUI cleanup" />
     <MESSAGE value="Additional Unit Test files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Additional Unit Test files" />
+    <MESSAGE value="Satisfaction polling is now functional.&#10;Might need to adjust scoring of tourist/family when seats loop around." />
+    <option name="LAST_COMMIT_MESSAGE" value="Satisfaction polling is now functional.&#10;Might need to adjust scoring of tourist/family when seats loop around." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GUIPages.py</url>
-          <line>288</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -483,13 +463,6 @@
     <entry file="file://$PROJECT_DIR$/multipleWindowsExample.py" />
     <entry file="file://$PROJECT_DIR$/CustomerGUI.py" />
     <entry file="file://$PROJECT_DIR$/ManagerGUI.py" />
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8040">
-          <caret line="549" selection-start-line="549" selection-end-line="549" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -514,30 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GUIPages.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="587" column="30" selection-start-line="587" selection-start-column="30" selection-end-line="587" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#254#367#0" />
-            <element signature="e#433#4906#0" />
-            <element signature="e#4945#6488#0" />
-            <element signature="e#6523#9464#0" />
-            <element signature="e#9501#12824#0" />
-            <element signature="e#10957#11467#0" />
-            <element signature="e#11554#12242#0" />
-            <element signature="e#12864#15237#0" />
-            <element signature="e#15167#17534#0" />
-            <element signature="e#17246#22022#0" />
-            <element signature="e#22060#23802#0" />
-            <element signature="e#23836#25528#0" />
-            <element signature="e#25569#27214#0" />
-            <element signature="e#27256#29211#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -548,34 +497,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_Manager.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_Customer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="125">
+          <caret line="549" selection-start-line="549" selection-end-line="549" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Customer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="134" column="26" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
+        <state relative-caret-position="752">
+          <caret line="70" column="40" lean-forward="true" selection-start-line="70" selection-start-column="40" selection-end-line="70" selection-end-column="40" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#2304#2408#0" />
-            <element signature="e#2759#3066#0" />
             <element signature="e#3809#4115#0" />
             <element signature="e#4188#4600#0" />
             <element signature="e#4581#5059#0" />
@@ -583,10 +517,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test_Customer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_Flight.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="555">
+          <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -595,19 +549,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flight.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="242" column="25" selection-start-line="242" selection-start-column="25" selection-end-line="242" selection-end-column="25" />
+        <state relative-caret-position="563">
+          <caret line="354" selection-start-line="354" selection-end-line="354" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#1690#1823#0" />
-            <element signature="e#1858#2479#0" />
-            <element signature="e#2522#3138#0" />
-            <element signature="e#3187#3217#0" />
-            <element signature="e#3315#3672#0" />
-            <element signature="e#3734#4905#0" />
-            <element signature="e#5607#7527#0" />
-            <element signature="e#5165#5256#0" />
-            <element signature="e#8942#9614#0" />
+            <element signature="e#2521#2654#0" />
+            <element signature="e#2689#3310#0" />
+            <element signature="e#3353#3969#0" />
+            <element signature="e#4018#4048#0" />
+            <element signature="e#4083#4100#0" />
+            <element signature="e#4139#4164#0" />
+            <element signature="e#4622#5864#0" />
+            <element signature="e#5901#8654#0" />
+            <element signature="e#8712#8956#0" />
+            <element signature="e#8816#8851#0" />
+            <element signature="e#11446#13309#0" />
+            <element signature="e#8970#9005#0" />
+            <element signature="e#8825#8916#0" />
+            <element signature="e#8971#9631#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GUIPages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="338" column="40" selection-start-line="338" selection-start-column="40" selection-end-line="338" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#254#367#0" />
+            <element signature="e#433#4908#0" />
+            <element signature="e#4947#6873#0" />
+            <element signature="e#11489#12001#0" />
+            <element signature="e#12047#12693#0" />
+            <element signature="e#13756#14078#0" />
+            <element signature="e#14120#14434#0" />
           </folding>
         </state>
       </provider>

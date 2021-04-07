@@ -22,14 +22,17 @@ class FlightTest(unittest.TestCase):
     def test_addFamilyOne(self):
         flight = Flight()
         options = flight.add_family(1)
+        flight.confirm(options[0], "user13")
 
     def test_addFamilyTwo(self):
         flight = Flight()
         options = flight.add_family(2)
+        flight.confirm(options[0], "user14")
 
     def test_addFamilyThree(self):
         flight = Flight()
         options = flight.add_family(3)
+        flight.confirm(options[0], "user15")
 
 
 if __name__ == '__main__':

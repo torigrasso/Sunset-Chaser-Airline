@@ -4,8 +4,9 @@ from Manager import Manager
 
 class ManagerTest(unittest.TestCase):
 
-    def create_manager(self):
-        self.assertEqual(True, False)
+    def createManager(self):
+        Manager("newManager", "p@sSw0rD", "321")
+        # check DB now to see that the managere was created
 
 
 if __name__ == '__main__':

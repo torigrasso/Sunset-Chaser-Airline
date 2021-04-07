@@ -222,7 +222,7 @@ class Flight:
                 return options
 
         # ENTIRE FLIGHT ---------------------------------------------------------
-        # NO PREFERENCE
+        # NO PREFERENCES MET
         temp = []
         for i in range(0, 120):
             if self.seats[i] == 'None':
@@ -237,8 +237,165 @@ class Flight:
         return options
 
     def add_family(self, child_count):
-        # give the user three options if possible
+
         options = []
+
+        if child_count == 1:
+            options = self.add_family_3()
+        elif child_count == 2:
+            options = self.add_family_4()
+        elif child_count == 3:
+            options = self.add_family_5()
+
+        return options
+
+    def add_family_3(self):
+        options = []
+
+        # NORMAL SEATING---------------------------------------------------------
+
+        # RIGHT AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat + 1] == 'None' and self.seats[seat + 2] == 'None':
+                    options.append([seat, seat+1, seat+2])
+                    if len(options) == 3:
+                        return options
+
+        # LEFT AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.left_aisle_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat - 1] == 'None' and self.seats[seat - 2] == 'None':
+                    options.append([seat-2, seat-1, seat])
+                    if len(options) == 3:
+                        return options
+
+        # BUSINESS SELECT---------------------------------------------------------
+
+        # RIGHT AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat + 1] == 'None' and self.seats[seat + 2] == 'None':
+                    options.append([seat, seat+1, seat+2])
+                    if len(options) == 3:
+                        return options
+            # stop loop once business select is done
+            else:
+                break
+
+        for seat in self.left_aisle_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat - 1] == 'None' and self.seats[seat - 2] == 'None':
+                    options.append([seat-2, seat-1, seat])
+                    if len(options) == 3:
+                        return options
+            # stop loop once business select is done
+            else:
+                break
+
+        # ENTIRE FLIGHT ---------------------------------------------------------
+        # NO PREFERENCES MET
+        temp = []
+        for i in range(0, 120):
+            if self.seats[i] == 'None':
+                temp.append(i)
+                if len(temp) == 3:
+                    options.append(temp)
+                    temp = []
+            if len(options) == 3:
+                return options
+
+        return options
+
+    def add_family_4(self):
+        options = []
+
+        # NORMAL SEATING---------------------------------------------------------
+
+        # AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat+1] == 'None' and self.seats[seat-1] == 'None':
+                    if self.seats[seat-2] == 'None':
+                        options.append([seat-2, seat-1, seat, seat+1])
+                    elif self.seats[seat+2] == 'None':
+                        options.append([seat-1, seat, seat+1, seat+2])
+                    if len(options) == 3:
+                        return options
+
+        # BUSINESS SELECT---------------------------------------------------------
+
+        # AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat+1] == 'None' and self.seats[seat-1] == 'None':
+                    if self.seats[seat-2] == 'None':
+                        options.append([seat-2, seat-1, seat, seat+1])
+                    elif self.seats[seat+2] == 'None':
+                        options.append([seat-1, seat, seat+1, seat+2])
+                    if len(options) == 3:
+                        return options
+            else:
+                break
+
+        # ENTIRE FLIGHT ---------------------------------------------------------
+        # NO PREFERENCES MET
+        temp = []
+        for i in range(0, 120):
+            if self.seats[i] == 'None':
+                temp.append(i)
+                if len(temp) == 4:
+                    options.append(temp)
+                    temp = []
+            if len(options) == 3:
+                return options
+
+        return options
+
+    def add_family_5(self):
+        options = []
+
+        # NORMAL SEATING---------------------------------------------------------
+
+        # AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 11 < seat < 120:
+                if self.seats[seat] == 'None' and self.seats[seat + 1] == 'None' and self.seats[seat - 1] == 'None' and self.seats[seat - 2] == 'None':
+                    if self.seats[seat - 3] == 'None':
+                        options.append([seat - 3, seat - 2, seat - 1, seat, seat + 1])
+                    elif self.seats[seat + 2] == 'None':
+                        options.append([seat - 2, seat - 1, seat, seat + 1, seat + 2])
+                    if len(options) == 3:
+                        return options
+
+        # BUSINESS SELECT---------------------------------------------------------
+
+        # AISLE SEAT PREFERENCE & GROUPED TOGETHER
+        for seat in self.right_aisle_seats:
+            if 0 <= seat <= 11:
+                if self.seats[seat] == 'None' and self.seats[seat + 1] == 'None' and self.seats[seat - 1] == 'None' and self.seats[seat - 2] == 'None':
+                    if self.seats[seat - 3] == 'None':
+                        options.append([seat - 3, seat - 2, seat - 1, seat, seat + 1])
+                    elif self.seats[seat + 2] == 'None':
+                        options.append([seat - 2, seat - 1, seat, seat + 1, seat + 2])
+                    if len(options) == 3:
+                        return options
+            else:
+                break
+
+        # ENTIRE FLIGHT ---------------------------------------------------------
+        # NO PREFERENCES MET
+        temp = []
+        for i in range(0, 120):
+            if self.seats[i] == 'None':
+                temp.append(i)
+                if len(temp) == 5:
+                    options.append(temp)
+                    temp = []
+            if len(options) == 3:
+                return options
+
+        return options
 
     def end_flight(self):
         self.active = 'False'

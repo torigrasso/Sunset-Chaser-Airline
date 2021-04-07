@@ -94,10 +94,10 @@ class HomePage(tk.Frame):
                     error2['text'] = "Passwords do not match"
                     return
 
-                # Add New Manager to DB
+                # Add New Customer to DB
                 Customer(user, pw1)
 
-                # Navigate To Manager Portal
+                # Navigate To Customer Portal
                 controller.refresh_user(user, "customer")
                 controller.show_frame(CustomerPortal)
 
@@ -210,7 +210,7 @@ class BuyTickets(tk.Frame):
             elif selection == 'Family Travelers (2 adults + 2 child)':
                 return "FT-2"
             elif selection == 'Family Travelers (2 adults + 3 child)':
-                return "FT-2"
+                return "FT-3"
 
         def updateTraveler():
             if ticket_options.get() != '':
@@ -328,10 +328,15 @@ class ConfirmSeats(tk.Frame):
 
                 elif user.type == "FT-1":
                     options = f.add_family(1)
-                elif user.type == "FT-1":
+                    display_group(index)
+
+                elif user.type == "FT-2":
                     options = f.add_family(2)
-                elif user.type == "FT-1":
+                    display_group(index)
+
+                elif user.type == "FT-3":
                     options = f.add_family(3)
+                    display_group(index)
 
             def confirm():
                 if user.type == "BT-BS" or user.type == "BT-N":

@@ -62,7 +62,7 @@ class Customer:
     def confirm_tickets(self, seats, num):
         self.seats = seats
         self.flight_num = num
-        self.satisfaction = self.calculate_satisfaction(self.type)
+        self.satisfaction = self.calculate_satisfaction()
         self.update_DB()
 
     def calculate_satisfaction(self):
