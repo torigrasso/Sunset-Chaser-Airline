@@ -1,5 +1,4 @@
-import sqlite3
-from sqlite3 import Error
+from Connection import create_connection
 
 
 class Manager:
@@ -9,7 +8,7 @@ class Manager:
         self.password = password
         self.auth_code = auth_code
 
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
 
         # Add To Database
@@ -17,11 +16,3 @@ class Manager:
         with conn:
             c.execute(insert_string, [self.username, str(self.password), int(self.auth_code)])
 
-    @staticmethod
-    def create_connection(file):
-        conn = None
-        try:
-            conn = sqlite3.connect(file)
-        except Error as e:
-            print(e)
-        return conn

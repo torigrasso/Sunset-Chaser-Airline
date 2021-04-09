@@ -9,15 +9,7 @@ from Customer import Customer
 from Manager import Manager
 from Flight import Flight
 
-
-# Connect to DB
-def create_connection(file):
-    conn = None
-    try:
-        conn = sqlite3.connect(file)
-    except Error as e:
-        print(e)
-    return conn
+from Connection import create_connection
 
 
 # ------- Customer Pages -------
@@ -653,6 +645,7 @@ class EndFlight(tk.Frame):
         def endFlight():
             f.end_flight()
             f.create_new_flight()
+            controller.refresh_user(controller.USER, controller.USERTYPE)
             controller.show_frame(ManagerPortal)
 
         # ----End The Flight----
@@ -742,7 +735,8 @@ class SatisfactoryScore(tk.Frame):
         info3.grid(row=6, column=0, padx=5, columnspan=6)
 
         # get previous flight score
-        flight_num = f.number #- 1
+        flight_num = f.number - 1
+
         with conn:
             cursor.execute("SELECT * FROM FLIGHT WHERE NUMBER=?", (flight_num,))
 

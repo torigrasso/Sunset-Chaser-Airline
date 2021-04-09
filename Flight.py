@@ -1,5 +1,4 @@
-import sqlite3
-from sqlite3 import Error
+from Connection import create_connection
 from random import randint
 import json
 from Customer import Customer
@@ -9,7 +8,7 @@ class Flight:
 
     def __init__(self):
 
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
 
         # get the current flight's info
@@ -57,21 +56,12 @@ class Flight:
                     if i % 3 == 0:
                         self.right_aisle_seats.append(i)
 
-    @staticmethod
-    def create_connection(file):
-        conn = None
-        try:
-            conn = sqlite3.connect(file)
-        except Error as e:
-            print(e)
-        return conn
-
     def update_DB(self):
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
         seats_string = json.dumps(self.seats)
         customer_string = json.dumps(self.customer_list)
-        # get the current flight's info
+        # update the current flight's info
         with conn:
             c.execute("UPDATE FLIGHT SET SCORE=? WHERE NUMBER=?", (self.score, self.number))
             c.execute("UPDATE FLIGHT SET SEATS=? WHERE NUMBER=?", (seats_string, self.number))
@@ -84,7 +74,7 @@ class Flight:
         self.number += 1
         self.customer_list = ['']
 
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
 
         seats_string = json.dumps(self.seats)
@@ -241,15 +231,15 @@ class Flight:
         options = []
 
         if child_count == 1:
-            options = self.add_family_3()
+            options = self.family_3()
         elif child_count == 2:
-            options = self.add_family_4()
+            options = self.family_4()
         elif child_count == 3:
-            options = self.add_family_5()
+            options = self.family_5()
 
         return options
 
-    def add_family_3(self):
+    def family_3(self):
         options = []
 
         # NORMAL SEATING---------------------------------------------------------
@@ -307,7 +297,7 @@ class Flight:
 
         return options
 
-    def add_family_4(self):
+    def family_4(self):
         options = []
 
         # NORMAL SEATING---------------------------------------------------------
@@ -352,7 +342,7 @@ class Flight:
 
         return options
 
-    def add_family_5(self):
+    def family_5(self):
         options = []
 
         # NORMAL SEATING---------------------------------------------------------
@@ -398,22 +388,22 @@ class Flight:
         return options
 
     def end_flight(self):
-        self.active = 'False'
         self.calculate_satisfactory_score()
-
+        self.active = 'False'
         self.update_DB()
 
     def calculate_satisfactory_score(self):
 
-        if len(self.customer_list < 10):
+        if len(self.customer_list) < 10:
             groups = self.customer_list
         else:
             temp = self.customer_list
             groups = []
             # find random customers to poll
             for i in range(10):
-                randomI = randint(0, len(self.customer_list-1))
-                groups[i] = temp[randomI]
+                length = len(temp)
+                randomI = randint(0, len(temp)-1)
+                groups.append(temp[randomI])
                 # remove customer after selecting so you do not chose them again
                 temp.pop(randomI)
 

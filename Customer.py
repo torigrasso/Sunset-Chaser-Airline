@@ -1,6 +1,5 @@
-import sqlite3
-from sqlite3 import Error
 import json
+from Connection import create_connection
 
 
 class Customer:
@@ -8,7 +7,7 @@ class Customer:
     def __init__(self, username, password=""):
 
         # If the user is already created we need to pull from the database
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
         exists = False
 
@@ -24,6 +23,7 @@ class Customer:
                     self.type = r[3]
                     self.seats = json.loads(r[4])
                     self.satisfaction = r[5]
+                    break
 
         if exists is False:
             self.username = username
@@ -38,17 +38,8 @@ class Customer:
             with conn:
                 c.execute(insert_string, [str(self.username), str(self.password), self.satisfaction])
 
-    @staticmethod
-    def create_connection(file):
-        conn = None
-        try:
-            conn = sqlite3.connect(file)
-        except Error as e:
-            print(e)
-        return conn
-
     def update_DB(self):
-        conn = self.create_connection("airline.db")
+        conn = create_connection("airline.db")
         c = conn.cursor()
 
         seats_string = json.dumps(self.seats)
@@ -154,6 +145,3 @@ class Customer:
 
     def get_ticket_info(self):
         return str(self.flight_num), self.type, self.seats
-
-    def get_seats(self):
-        return self.seats
