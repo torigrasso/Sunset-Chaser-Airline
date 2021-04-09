@@ -392,24 +392,26 @@ class TicketGenerated(tk.Frame):
 
             name_string = "Name: " + user.username
             name_label = ttk.Label(self, text=name_string)
-            name_label.grid(row=5, column=0, pady=10, columnspan=2)
+            name_label.grid(row=5, column=0, pady=10, columnspan=3)
 
             num, t, seat_list = user.get_ticket_info()
 
             flight_string = "Flight #" + num
             flight_label = ttk.Label(self, text=flight_string)
-            flight_label.grid(row=6, column=0, pady=10, columnspan=2)
+            flight_label.grid(row=6, column=0, pady=10, columnspan=3)
 
-            type_string = "Traveler Type:" + t
+            type_string = "Traveler Type: " + t
             type_label = ttk.Label(self, text=type_string)
-            type_label.grid(row=7, column=0, pady=10, columnspan=2)
+            type_label.grid(row=7, column=0, pady=10, columnspan=3)
 
             seat_string = "Seats: "
             for seat in seat_list:
-                seat_string += f.get_seat_number(seat) + ", "
+                seat_string += f.get_seat_number(seat)
+                if seat != seat_list[len(seat_list)-1]:
+                    seat_string += ", "
 
             seats = ttk.Label(self, text=seat_string)
-            seats.grid(row=8, column=0, columnspan=2)
+            seats.grid(row=8, column=0, columnspan=3)
 
 
 class ViewSeatsCustomer(tk.Frame):

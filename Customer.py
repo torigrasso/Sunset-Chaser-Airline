@@ -28,15 +28,16 @@ class Customer:
         if exists is False:
             self.username = username
             self.password = password
-            self.type = 'None'
-            self.flight_num = 'None'
-            self.seats = 'None'
+            self.flight_num = ''
+            self.type = ''
+            self.seats = []
+            seats_string = json.dumps(self.seats)
             self.satisfaction = 0
 
             # Add to DB
-            insert_string = "INSERT INTO CUSTOMER (USER, PASSWORD, SATISFACTION) VALUES (?, ?, ?)"
+            insert_string = "INSERT INTO CUSTOMER (USER, PASSWORD, FLIGHT_NUMBER, TRAVEL_TYPE, SEATS, SATISFACTION) VALUES (?, ?, ?, ?, ?, ?)"
             with conn:
-                c.execute(insert_string, [str(self.username), str(self.password), self.satisfaction])
+                c.execute(insert_string, [str(self.username), str(self.password), self.flight_num, str(self.type), seats_string, self.satisfaction])
 
     def update_DB(self):
         conn = create_connection("airline.db")
