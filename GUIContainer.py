@@ -27,15 +27,14 @@ class GUIContainer(tk.Tk):
         style.configure('TEntry', background='white', foreground='black')
         style.configure('TCombobox', selectbackground='white', background='orange', foreground='black')
 
-        # initializing frames to an empty array
-        self.frames = {}
-
         # variable to know who is logged in and helps with page info related to user
         self.USER = user
         self.USERTYPE = type
 
-        # iterating through a tuple consisting
-        # of the different page layouts
+        # initializing frames to an empty array
+        self.frames = {}
+
+        # loop through pages
         for F in (HomePage, ManagerSignIn, CustomerPortal, BuyTickets, ConfirmSeats, TicketGenerated,
                   ViewSeatsCustomer, ManagerPortal, ViewSeatsManager, EndFlight, SatisfactoryScore):
 
